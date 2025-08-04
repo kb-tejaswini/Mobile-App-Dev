@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Career Carve Home (6.7" Single Screen)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<style>
+  * { box-sizing:border-box; }
+  body {
+    margin:0;
+    font-family: system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+    background:#f5f7fa;
+    color:#1f2d3a;
+    max-width:414px; /* approximate 6.7" phone width */
+    margin:0 auto;
+  }
+  .container { padding:12px; }
+  .top-bar {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:4px 0;
+  }
+  .profile { display:flex; align-items:center; gap:8px; }
+  .avatar {
+    width:36px; height:36px;
+    border-radius:50%;
+    background:#666;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+    font-size:14px;
+  }
+  .icons { display:flex; gap:12px; font-size:18px; }
+  .card {
+    background:#fff;
+    border-radius:14px;
+    padding:14px 16px;
+    margin-top:12px;
+    position:relative;
+    box-shadow:0 6px 18px -8px rgba(31,45,58,0.08);
+  }
+  .resume-progress {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+  }
+  .progress-wrapper {
+    flex:1;
+    margin-right:12px;
+  }
+  .progress-bar {
+    background:#e6e9ef;
+    border-radius:10px;
+    overflow:hidden;
+    height:12px;
+    margin-top:6px;
+  }
+  .progress-fill {
+    width:35%;
+    height:100%;
+    background:linear-gradient(135deg,#5f3dc4,#9f8bed);
+  }
+  .btn-primary {
+    background:#2069f3;
+    color:#fff;
+    border:none;
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    font-size:13px;
+    white-space:nowrap;
+  }
+  .small-link {
+    font-size:12px;
+    color:#556a8f;
+    margin-top:6px;
+    display:inline-block;
+    cursor:pointer;
+  }
+  .quick-actions {
+    display:flex;
+    gap:8px;
+    margin-top:8px;
+  }
+  .action {
+    flex:1;
+    background:#fff;
+    border-radius:12px;
+    padding:12px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    font-size:12px;
+    position:relative;
+    box-shadow:0 8px 24px -8px rgba(31,45,58,0.08);
+  }
+  .action-title { margin:6px 0 4px; font-weight:600; }
+  .mentor-section {
+    margin-top:14px;
+  }
+  .section-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:6px;
+    font-weight:600;
+    font-size:16px;
+  }
+  .see-all {
+    font-size:13px;
+    color:#2069f3;
+    cursor:pointer;
+  }
+  .mentor-carousel {
+    display:flex;
+    overflow-x:auto;
+    gap:10px;
+    padding-bottom:4px;
+    scroll-behavior:smooth;
+  }
+  .mentor-card {
+    min-width:150px;
+    background:#fff;
+    border-radius:12px;
+    padding:10px;
+    flex-shrink:0;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    font-size:12px;
+    box-shadow:0 10px 30px -10px rgba(31,45,58,0.08);
+  }
+  .mentor-photo {
+    width:40px; height:40px;
+    border-radius:50%;
+    background:#ccc;
+    flex-shrink:0;
+  }
+  .mentor-name { font-weight:700; line-height:1.1; }
+  .mentor-role { font-size:11px; color:#555; }
+  .rating {
+    display:flex;
+    align-items:center;
+    gap:4px;
+    font-size:11px;
+    margin-top:auto;
+  }
+  .grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-top:8px;
+  }
+  .tile {
+    background:#e9f6ff;
+    border-radius:10px;
+    padding:12px;
+    text-align:center;
+    font-weight:600;
+    font-size:13px;
+    min-height:60px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+  .practice-podcast {
+    display:flex;
+    gap:10px;
+    margin-top:14px;
+  }
+  .practice {
+    flex:1;
+    background:#fff;
+    border-radius:14px;
+    padding:14px;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    font-size:13px;
+    box-shadow:0 14px 36px -12px rgba(31,45,58,0.08);
+  }
+  .badge { 
+    display:inline-block;
+    background:#ff6f61;
+    color:#fff;
+    padding:4px 10px;
+    border-radius:12px;
+    font-size:10px;
+    font-weight:600;
+    position:absolute;
+    top:12px;
+    right:12px;
+  }
+  .podcasts {
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    min-width:150px;
+  }
+  .podcast-card {
+    background:#fff;
+    border-radius:12px;
+    padding:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:12px;
+    box-shadow:0 10px 30px -10px rgba(31,45,58,0.08);
+  }
+  .podcast-info {
+    flex:1;
+    overflow:hidden;
+  }
+  .podcast-title {
+    font-weight:600;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .podcast-desc {
+    font-size:11px;
+    color:#555;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    margin-top:2px;
+  }
+  .duration {
+    font-size:11px;
+    margin-left:8px;
+    white-space:nowrap;
+  }
+  .bottom-nav {
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:414px; /* Match body max-width */
+    background:#fff;
+    border-top:1px solid #e3e9f5;
+    display:flex;
+    justify-content:space-around;
+    padding:8px 0;
+    font-size:11px;
+    align-items:center;
+  }
+  .nav-item {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    flex:1;
+    padding:4px 0;
+  }
+  .nav-icon {
+    width:28px; height:28px;
+    background:#d9e2f5;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+    transition:background 0.2s;
+  }
+  .nav-item.active .nav-icon {
+    background:#2069f3;
+    color:#fff;
+  }
+  .small { font-size:10px; color:#888; }
+  
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+    max-width: 300px;
+    margin: 20px;
+  }
+  
+  .modal-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #fef3c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 32px;
+  }
+  
+  .modal-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .modal-desc {
+    color: #64748b;
+    margin-bottom: 24px;
+  }
+  
+  .modal-btn {
+    background: #2069f3;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .modal-btn:hover {
+    background: #1d4ed8;
+  }
+  
+  /* Clickable elements */
+  .clickable {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .clickable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -8px rgba(31,45,58,0.15);
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="top-bar">
+      <div class="profile">
+        <div class="avatar">K</div>
+        <div>Hi Kothapalli</div>
+      </div>
+      <div class="icons">
+        <div title="Notifications" class="clickable" onclick="showComingSoon('Notifications')">🔔</div>
+        <div title="Messages" class="clickable" onclick="showComingSoon('Messages')">💬</div>
+      </div>
+    </div>
+
+    <!-- Resume Status -->
+    <div class="card">
+      <div class="resume-progress">
+        <div class="progress-wrapper">
+          <div style="font-weight:600;">Resume Progress</div>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+          <div style="font-size:12px; margin-top:4px;">Barely There</div>
+        </div>
+        <div>
+          <button class="btn-primary" onclick="showComingSoon('Edit Resume')">Edit Resume</button>
+        </div>
+      </div>
+      <div class="small-link clickable" onclick="showComingSoon('Resume Tips')">View Resume Tips</div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <div class="action clickable" onclick="showComingSoon('Mock Interview')">
+        <div style="font-size:24px;">🎤</div>
+        <div class="action-title">Mock Interview</div>
+        <div style="font-size:11px; color:#555;">Simulate the real interview experience</div>
+        <div style="margin-top:6px;"><button class="btn-primary" style="padding:6px 10px; font-size:11px;" onclick="event.stopPropagation(); showComingSoon('Book Mock Interview')">Book Now</button></div>
+      </div>
+      <div class="action clickable" onclick="showComingSoon('Resume Discussion')">
+        <div style="font-size:24px;">📄</div>
+        <div class="action-title">Resume Discussion</div>
+        <div style="font-size:11px; color:#555;">Gain recruiter insights</div>
+        <div style="margin-top:6px;"><button class="btn-primary" style="padding:6px 10px; font-size:11px;" onclick="event.stopPropagation(); showComingSoon('Book Resume Discussion')">Book Now</button></div>
+      </div>
+      <div class="action clickable" onclick="showComingSoon('Expert Connect')">
+        <div style="font-size:24px;">🧠</div>
+        <div class="action-title">Expert Connect</div>
+        <div style="font-size:11px; color:#555;">1:1 guidance</div>
+        <div style="margin-top:6px;"><button class="btn-primary" style="padding:6px 10px; font-size:11px;" onclick="event.stopPropagation(); showComingSoon('Connect with Expert')">Connect</button></div>
+      </div>
+    </div>
+
+    <!-- Mentors -->
+    <div class="mentor-section">
+      <div class="section-header">
+        <div>Recommended Mentors</div>
+        <div class="see-all clickable" onclick="showComingSoon('All Mentors')">See All &gt;</div>
+      </div>
+      <div class="mentor-carousel">
+        <div class="mentor-card clickable" onclick="showComingSoon('Nitish Chawla - Investment Director')">
+          <div style="display:flex; gap:8px; align-items:center;">
+            <div class="mentor-photo"></div>
+            <div>
+              <div class="mentor-name">Nitish Chawla</div>
+              <div class="mentor-role">Investment Director @ IFU</div>
+            </div>
+          </div>
+          <div class="rating">★ 4.57 (7)</div>
+        </div>
+        <div class="mentor-card clickable" onclick="showComingSoon('Atharvdeep Agrawal - Marketing Manager')">
+          <div style="display:flex; gap:8px; align-items:center;">
+            <div class="mentor-photo"></div>
+            <div>
+              <div class="mentor-name">Atharvdeep Agrawal</div>
+              <div class="mentor-role">Marketing Manager @ B.D.</div>
+            </div>
+          </div>
+          <div class="rating">★ 4.51 (152)</div>
+        </div>
+        <div class="mentor-card clickable" onclick="showComingSoon('Bharat Sharma - AVP JPMorgan')">
+          <div style="display:flex; gap:8px; align-items:center;">
+            <div class="mentor-photo"></div>
+            <div>
+              <div class="mentor-name">Bharat Sharma</div>
+              <div class="mentor-role">AVP @ JPMorgan Chase</div>
+            </div>
+          </div>
+          <div class="rating">★ 4.74 (53)</div>
+        </div>
+        <div class="mentor-card clickable" onclick="showComingSoon('Ankit Sancheti - Marketing Lead')">
+          <div style="display:flex; gap:8px; align-items:center;">
+            <div class="mentor-photo"></div>
+            <div>
+              <div class="mentor-name">Ankit Sancheti</div>
+              <div class="mentor-role">Marketing Lead @ Medtronic</div>
+            </div>
+          </div>
+          <div class="rating">★ 3.24 (21)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MBA Concepts & GK -->
+    <div class="mentor-section">
+      <div class="section-header">
+        <div>MBA Concepts & GK</div>
+        <div class="see-all clickable" onclick="showComingSoon('All MBA Concepts')">See All &gt;</div>
+      </div>
+      <div class="grid">
+        <div class="tile clickable" onclick="showComingSoon('Technology Concepts')">Technology</div>
+        <div class="tile clickable" onclick="showComingSoon('Operations Concepts')">Operations</div>
+        <div class="tile clickable" onclick="showComingSoon('Finance Concepts')">Finance</div>
+        <div class="tile clickable" onclick="showComingSoon('Insurance Concepts')">Insurance</div>
+        <div class="tile clickable" onclick="showComingSoon('Sales & Marketing Concepts')">Sales & Marketing</div>
+        <div class="tile clickable" onclick="showComingSoon('HR Concepts')">HR</div>
+      </div>
+    </div>
+
+    <!-- Practice & Podcasts -->
+    <div class="practice-podcast">
+      <div class="practice clickable" onclick="showComingSoon('Simulation Rooms')">
+        <div style="font-size:16px; font-weight:700;">Simulation Rooms</div>
+        <div style="margin-top:6px;">Practice HR Interviews, Group Discussions and more.</div>
+        <div style="margin-top:10px; font-size:12px;">New Release</div>
+        <div style="margin-top:8px;">
+          <button class="btn-primary" style="width:100%; font-size:13px;" onclick="event.stopPropagation(); showComingSoon('Start Practice')">Start Practice</button>
+        </div>
+        <div class="badge">New</div>
+      </div>
+      <div class="podcasts">
+        <div class="section-header" style="padding:0; margin:0;">
+          <div style="font-size:14px;">Exclusive Prep Podcasts</div>
+        </div>
+        <div class="podcast-card clickable" onclick="showComingSoon('Super Intern Podcast - Episode 1')">
+          <div class="podcast-info">
+            <div class="podcast-title">Super Intern Podcast</div>
+            <div class="podcast-desc">Is stipend a consideration to do an internship? Will work from home affect...</div>
+          </div>
+          <div class="duration">20 mins ▶</div>
+        </div>
+        <div class="podcast-card clickable" onclick="showComingSoon('Super Intern Podcast - Episode 2')">
+          <div class="podcast-info">
+            <div class="podcast-title">Super Intern Podcast</div>
+            <div class="podcast-desc">One crucial aspect of a student's academic career is an internship...</div>
+          </div>
+          <div class="duration">16 mins ▶</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <div class="nav-item active">
+      <div class="nav-icon">🏠</div>
+      <div class="small">Home</div>
+    </div>
+    <div class="nav-item clickable" onclick="showComingSoon('Calendar')">
+      <div class="nav-icon">🗓️</div>
+      <div class="small">Calendar</div>
+    </div>
+    <div class="nav-item clickable" onclick="showComingSoon('Mentors')">
+      <div class="nav-icon">👥</div>
+      <div class="small">Mentors</div>
+    </div>
+    <div class="nav-item clickable" onclick="showComingSoon('Resources')">
+      <div class="nav-icon">📚</div>
+      <div class="small">Resources</div>
+    </div>
+    <div class="nav-item clickable" onclick="showComingSoon('More Options')">
+      <div class="nav-icon">⋯</div>
+      <div class="small">More</div>
+    </div>
+  </div>
+
+  <!-- Coming Soon Modal -->
+  <div class="modal" id="comingSoonModal">
+    <div class="modal-content">
+      <div class="modal-icon">🚀</div>
+      <h3 class="modal-title">Coming Soon!</h3>
+      <p class="modal-desc">This feature is under development and will be available soon.</p>
+      <button class="modal-btn" onclick="closeModal()">Got it!</button>
+    </div>
+  </div>
+
+  <script>
+    function showComingSoon(feature) {
+      const modal = document.getElementById('comingSoonModal');
+      const title = modal.querySelector('.modal-title');
+      title.textContent = `${feature} - Coming Soon!`;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('comingSoonModal');
+      modal.style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('comingSoonModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html> 
