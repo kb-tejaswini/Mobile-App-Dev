@@ -1,0 +1,377 @@
+import React, { useState } from 'react';
+import './CareerCarveHome.css';
+
+const CareerCarveHome = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [modalFeature, setModalFeature] = useState('');
+
+  const showComingSoon = (feature) => {
+    setModalFeature(feature);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const handleModalBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      closeModal();
+    }
+  };
+
+  return (
+    <div className="career-carve-app">
+      <div className="container">
+        {/* Header */}
+        <div className="top-bar">
+          <div className="profile">
+            <div className="avatar">K</div>
+            <div>Hi Kothapalli</div>
+          </div>
+          <div className="icons">
+            <div 
+              title="Notifications" 
+              className="clickable" 
+              onClick={() => showComingSoon('Notifications')}
+            >
+              🔔
+            </div>
+            <div 
+              title="Messages" 
+              className="clickable" 
+              onClick={() => showComingSoon('Messages')}
+            >
+              💬
+            </div>
+          </div>
+        </div>
+
+        {/* Resume Status */}
+        <div className="card">
+          <div className="resume-progress">
+            <div className="progress-wrapper">
+              <div style={{ fontWeight: '600' }}>Resume Progress</div>
+              <div className="progress-bar">
+                <div className="progress-fill"></div>
+              </div>
+              <div style={{ fontSize: '12px', marginTop: '4px' }}>Barely There</div>
+            </div>
+            <div>
+              <button 
+                className="btn-primary" 
+                onClick={() => showComingSoon('Edit Resume')}
+              >
+                Edit Resume
+              </button>
+            </div>
+          </div>
+          <div 
+            className="small-link clickable" 
+            onClick={() => showComingSoon('Resume Tips')}
+          >
+            View Resume Tips
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="quick-actions">
+          <div 
+            className="action clickable" 
+            onClick={() => showComingSoon('Mock Interview')}
+          >
+            <div style={{ fontSize: '24px' }}>🎤</div>
+            <div className="action-title">Mock Interview</div>
+            <div style={{ fontSize: '11px', color: '#555' }}>
+              Simulate the real interview experience
+            </div>
+            <div style={{ marginTop: '6px' }}>
+              <button 
+                className="btn-primary" 
+                style={{ padding: '6px 10px', fontSize: '11px' }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  showComingSoon('Book Mock Interview');
+                }}
+              >
+                Book Now
+              </button>
+            </div>
+          </div>
+          <div 
+            className="action clickable" 
+            onClick={() => showComingSoon('Resume Discussion')}
+          >
+            <div style={{ fontSize: '24px' }}>📄</div>
+            <div className="action-title">Resume Discussion</div>
+            <div style={{ fontSize: '11px', color: '#555' }}>
+              Gain recruiter insights
+            </div>
+            <div style={{ marginTop: '6px' }}>
+              <button 
+                className="btn-primary" 
+                style={{ padding: '6px 10px', fontSize: '11px' }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  showComingSoon('Book Resume Discussion');
+                }}
+              >
+                Book Now
+              </button>
+            </div>
+          </div>
+          <div 
+            className="action clickable" 
+            onClick={() => showComingSoon('Expert Connect')}
+          >
+            <div style={{ fontSize: '24px' }}>🧠</div>
+            <div className="action-title">Expert Connect</div>
+            <div style={{ fontSize: '11px', color: '#555' }}>
+              1:1 guidance
+            </div>
+            <div style={{ marginTop: '6px' }}>
+              <button 
+                className="btn-primary" 
+                style={{ padding: '6px 10px', fontSize: '11px' }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  showComingSoon('Connect with Expert');
+                }}
+              >
+                Connect
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mentors */}
+        <div className="mentor-section">
+          <div className="section-header">
+            <div>Recommended Mentors</div>
+            <div 
+              className="see-all clickable" 
+              onClick={() => showComingSoon('All Mentors')}
+            >
+              See All &gt;
+            </div>
+          </div>
+          <div className="mentor-carousel">
+            <div 
+              className="mentor-card clickable" 
+              onClick={() => showComingSoon('Nitish Chawla - Investment Director')}
+            >
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <div className="mentor-photo"></div>
+                <div>
+                  <div className="mentor-name">Nitish Chawla</div>
+                  <div className="mentor-role">Investment Director @ IFU</div>
+                </div>
+              </div>
+              <div className="rating">★ 4.57 (7)</div>
+            </div>
+            <div 
+              className="mentor-card clickable" 
+              onClick={() => showComingSoon('Atharvdeep Agrawal - Marketing Manager')}
+            >
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <div className="mentor-photo"></div>
+                <div>
+                  <div className="mentor-name">Atharvdeep Agrawal</div>
+                  <div className="mentor-role">Marketing Manager @ B.D.</div>
+                </div>
+              </div>
+              <div className="rating">★ 4.51 (152)</div>
+            </div>
+            <div 
+              className="mentor-card clickable" 
+              onClick={() => showComingSoon('Bharat Sharma - AVP JPMorgan')}
+            >
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <div className="mentor-photo"></div>
+                <div>
+                  <div className="mentor-name">Bharat Sharma</div>
+                  <div className="mentor-role">AVP @ JPMorgan Chase</div>
+                </div>
+              </div>
+              <div className="rating">★ 4.74 (53)</div>
+            </div>
+            <div 
+              className="mentor-card clickable" 
+              onClick={() => showComingSoon('Ankit Sancheti - Marketing Lead')}
+            >
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <div className="mentor-photo"></div>
+                <div>
+                  <div className="mentor-name">Ankit Sancheti</div>
+                  <div className="mentor-role">Marketing Lead @ Medtronic</div>
+                </div>
+              </div>
+              <div className="rating">★ 3.24 (21)</div>
+            </div>
+          </div>
+        </div>
+
+        {/* MBA Concepts & GK */}
+        <div className="mentor-section">
+          <div className="section-header">
+            <div>MBA Concepts & GK</div>
+            <div 
+              className="see-all clickable" 
+              onClick={() => showComingSoon('All MBA Concepts')}
+            >
+              See All &gt;
+            </div>
+          </div>
+          <div className="grid">
+            <div 
+              className="tile clickable" 
+              onClick={() => showComingSoon('Technology Concepts')}
+            >
+              Technology
+            </div>
+            <div 
+              className="tile clickable" 
+              onClick={() => showComingSoon('Operations Concepts')}
+            >
+              Operations
+            </div>
+            <div 
+              className="tile clickable" 
+              onClick={() => showComingSoon('Finance Concepts')}
+            >
+              Finance
+            </div>
+            <div 
+              className="tile clickable" 
+              onClick={() => showComingSoon('Insurance Concepts')}
+            >
+              Insurance
+            </div>
+            <div 
+              className="tile clickable" 
+              onClick={() => showComingSoon('Sales & Marketing Concepts')}
+            >
+              Sales & Marketing
+            </div>
+            <div 
+              className="tile clickable" 
+              onClick={() => showComingSoon('HR Concepts')}
+            >
+              HR
+            </div>
+          </div>
+        </div>
+
+        {/* Practice & Podcasts */}
+        <div className="practice-podcast">
+          <div 
+            className="practice clickable" 
+            onClick={() => showComingSoon('Simulation Rooms')}
+          >
+            <div style={{ fontSize: '16px', fontWeight: '700' }}>Simulation Rooms</div>
+            <div style={{ marginTop: '6px' }}>
+              Practice HR Interviews, Group Discussions and more.
+            </div>
+            <div style={{ marginTop: '10px', fontSize: '12px' }}>New Release</div>
+            <div style={{ marginTop: '8px' }}>
+              <button 
+                className="btn-primary" 
+                style={{ width: '100%', fontSize: '13px' }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  showComingSoon('Start Practice');
+                }}
+              >
+                Start Practice
+              </button>
+            </div>
+            <div className="badge">New</div>
+          </div>
+          <div className="podcasts">
+            <div className="section-header" style={{ padding: 0, margin: 0 }}>
+              <div style={{ fontSize: '14px' }}>Exclusive Prep Podcasts</div>
+            </div>
+            <div 
+              className="podcast-card clickable" 
+              onClick={() => showComingSoon('Super Intern Podcast - Episode 1')}
+            >
+              <div className="podcast-info">
+                <div className="podcast-title">Super Intern Podcast</div>
+                <div className="podcast-desc">
+                  Is stipend a consideration to do an internship? Will work from home affect...
+                </div>
+              </div>
+              <div className="duration">20 mins ▶</div>
+            </div>
+            <div 
+              className="podcast-card clickable" 
+              onClick={() => showComingSoon('Super Intern Podcast - Episode 2')}
+            >
+              <div className="podcast-info">
+                <div className="podcast-title">Super Intern Podcast</div>
+                <div className="podcast-desc">
+                  One crucial aspect of a student's academic career is an internship...
+                </div>
+              </div>
+              <div className="duration">16 mins ▶</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Navigation */}
+      <div className="bottom-nav">
+        <div className="nav-item active">
+          <div className="nav-icon">🏠</div>
+          <div className="small">Home</div>
+        </div>
+        <div 
+          className="nav-item clickable" 
+          onClick={() => showComingSoon('Calendar')}
+        >
+          <div className="nav-icon">🗓️</div>
+          <div className="small">Calendar</div>
+        </div>
+        <div 
+          className="nav-item clickable" 
+          onClick={() => showComingSoon('Mentors')}
+        >
+          <div className="nav-icon">👥</div>
+          <div className="small">Mentors</div>
+        </div>
+        <div 
+          className="nav-item clickable" 
+          onClick={() => showComingSoon('Resources')}
+        >
+          <div className="nav-icon">📚</div>
+          <div className="small">Resources</div>
+        </div>
+        <div 
+          className="nav-item clickable" 
+          onClick={() => showComingSoon('More Options')}
+        >
+          <div className="nav-icon">⋯</div>
+          <div className="small">More</div>
+        </div>
+      </div>
+
+      {/* Coming Soon Modal */}
+      {showModal && (
+        <div className="modal" onClick={handleModalBackdropClick}>
+          <div className="modal-content">
+            <div className="modal-icon">🚀</div>
+            <h3 className="modal-title">{modalFeature} - Coming Soon!</h3>
+            <p className="modal-desc">
+              This feature is under development and will be available soon.
+            </p>
+            <button className="modal-btn" onClick={closeModal}>
+              Got it!
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CareerCarveHome; 
